@@ -1,0 +1,140 @@
+####################################################################
+#
+# Required packages for serverside vulnerability assessor
+#
+####################################################################
+
+#!/bin/bash
+
+##################################################################
+#
+# .......Neuronic.............
+#
+#
+# Written by Jason Vivier 2017
+#
+# Neuronic comes with no warrenty absolutely. In fact you might not
+# even want to use it.
+#
+#
+#
+##################################################################
+
+        # Program Information
+
+        PROGRAM_NAME="Neuronic 1"
+        PROGRAM_AUTHOR="jasonvivier"
+        PROGRAM_AUTHOR_CONTACT="jason.vivier@neuronsec.com"
+
+        # Version Information
+
+        PROGRAM_VERSION="1.0"
+
+        # Source
+
+        PROGRAM_SOURCE="https://github.com/jasonvivier/neuronic
+
+
+#
+##################################################################
+#
+# Create simple variables
+#
+##################################################################
+#
+
+SSHUSER=""
+SSHPW=""
+REPORTSDIR=""
+
+#
+##################################################################
+#
+# List simple functions
+#
+##################################################################
+#
+
+#
+# Get public IP
+#
+
+function wanip {
+    dig +short myip.opendns.com @resolver1.opendns.com
+}
+
+#
+# nmap localhost
+#
+
+function nmaplocal {
+    nmap localhost
+}
+
+#
+# get system hostname
+#
+
+function gethostname {
+    hostname
+}
+
+######################################################################
+#
+# Copy reports to ssh server
+#
+######################################################################
+
+function copyreports {
+     sshpass -p $SSHPW scp -r /home/folder/ $SSHUSER:$REPORTSDIR
+
+}
+
+
+######################################################################
+#
+# pull gits like you're addicted
+#
+######################################################################
+
+#
+# Pull latest scap git
+#
+
+function gitscap {
+    cd /home/folder/
+    git clone https://github.com/jasonvivier/ubuntu-scap.git
+}
+
+#
+# Install depends
+#
+
+function installdepends {
+    apt-get install -y git libopenscap8 chkrootkit sshpass
+}
+
+#
+# git nikto
+#
+
+function gitnikto {
+    git clone https://github.com/sullo/nikto.git nikto2
+}
+
+#
+# git Lynis
+#
+
+function getlynis {
+    cd /usr/local
+    git clone https://github.com/CISOfy/lynis
+}
+
+
+
+
+
+
+
+
